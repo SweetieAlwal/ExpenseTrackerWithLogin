@@ -2,6 +2,7 @@ import React,{useRef} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity,Image, ScrollView, FlatList, Animated} from 'react-native';
 import {COLORS, FONTS, SIZES,icons} from '../constants';
 import {VictoryPie} from 'victory-native';
+import {Svg} from 'react-native-svg';
 
 const Home = () => {
     //Date
@@ -496,7 +497,9 @@ const Home = () => {
                 alignItems:'center',
                 justifyContent: 'center'
             }}>
+        <Svg width={SIZES.width} height={SIZES.width} style={{width: "100%", height: "auto"}}>
                 <VictoryPie 
+                    standalone={false} // Android workaround
                     data={chartData}
                     colorScale={colorScales}
                     labels={(datum)=> `${datum.y}`}
@@ -527,6 +530,7 @@ const Home = () => {
                         }
                     }]}
                 />
+                </Svg>
                 <View style={{position: 'absolute', top: '42%', }}>
                 <Text style={{...FONTS.h1,textAlign: 'center'}}>{totalExpenseCount}</Text>
                 <Text style={{textAlign:'center',...FONTS.body3}}>Expenses</Text>
