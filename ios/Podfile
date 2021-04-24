@@ -12,6 +12,10 @@ target 'ExpenseTrackerWithLogin' do
     :hermes_enabled => false
   )
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'ExpenseTrackerWithLoginTests' do
     inherit! :complete
     # Pods for testing

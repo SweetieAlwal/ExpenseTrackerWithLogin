@@ -495,7 +495,8 @@ const Home = () => {
         return (
             <View style={{
                 alignItems:'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                marginLeft: 60
             }}>
         <Svg width={SIZES.width} height={SIZES.width} style={{width: "100%", height: "auto"}}>
                 <VictoryPie 
@@ -530,11 +531,11 @@ const Home = () => {
                         }
                     }]}
                 />
-                </Svg>
-                <View style={{position: 'absolute', top: '42%', }}>
+                <View style={{position: 'absolute', top: 110,marginLeft:125  }}>
                 <Text style={{...FONTS.h1,textAlign: 'center'}}>{totalExpenseCount}</Text>
                 <Text style={{textAlign:'center',...FONTS.body3}}>Expenses</Text>
                 </View>
+                </Svg>
             </View>
         )
     }
