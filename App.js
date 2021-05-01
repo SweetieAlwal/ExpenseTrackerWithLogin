@@ -13,7 +13,6 @@ import { ActivityIndicator, View } from 'react-native';
 import { COLORS } from './constants';
 import { AuthContext } from './components/context';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { withAuthenticator } from 'aws-amplify-react-native'
 
 const theme = {
   ...DefaultTheme,
@@ -158,4 +157,4 @@ const App = () =>{
     </AuthContext.Provider>
   )
 }
-export default withAuthenticator(App);
+export default App;
