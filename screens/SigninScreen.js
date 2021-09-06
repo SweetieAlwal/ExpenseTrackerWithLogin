@@ -1,13 +1,15 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet, Platform, Dimensions, StatusBar } from 'react-native';
 import { COLORS } from '../constants';
-import LinearGradient from 'react-native-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import * as Animatable from 'react-native-animatable'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import Feather from 'react-native-vector-icons/Feather'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import * as Animatable from 'react-native-animatable';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import { AuthContext } from '../components/context';
+import analytics from '@react-native-firebase/analytics';
+
 
 
 
@@ -21,47 +23,45 @@ const SigninScreen = ({navigation}) => {
         email: '',
         password: '',
         check_textInputChange: false,
-        secureTextEntry: true
+        secureTextEntry: true,
     });
     const textInputChange = (val) => {
-        if(val.length !== 0) {
+        if (val.length !== 0) {
             setData({
                 ...data,
                 email: val,
-                email: val,
-                check_textInputChange: true
-            })
+                check_textInputChange: true,
+            });
         } else {
             setData({
                 ...data,
                 email: val,
-                email: val,
-                check_textInputChange: false
-            })
+                check_textInputChange: false,
+            });
         }
-    }
-    const handlePasswordChange =(val) => {
+    };
+    const handlePasswordChange = (val) => {
         setData({
             ...data,
-            password: val
-        })
-    }
+            password: val,
+        });
+    };
     const updateSecureTextEntry = () => {
         setData({
             ...data,
-            secureTextEntry: !data.secureTextEntry
-        })
-    }
+            secureTextEntry: !data.secureTextEntry,
+        });
+    };
     const loginHandle = (username,password) => {
-        signIn(username,password)
-    }
+        signIn(username,password);
+    };
     return (
         <View style={styles.container}>
         <StatusBar backgroundColor = {COLORS.peach} barStyle="light-content"/>
         <View style={styles.header}>
         <Text style={styles.text_header}>Welcome!</Text>
         </View>
-        <Animatable.View 
+        <Animatable.View
         animation= "fadeInUpBig"
         style={styles.footer}>
         <Text style={styles.text_footer}>Email</Text>
@@ -77,7 +77,7 @@ const SigninScreen = ({navigation}) => {
             autoCapitalize= "none"
             onChangeText={(val)=>textInputChange(val)}
         />
-        { data.check_textInputChange ? 
+        { data.check_textInputChange ?
         <Animatable.View animation="bounceIn">
         <Feather
             name="check-circle"
@@ -103,7 +103,7 @@ const SigninScreen = ({navigation}) => {
 
         />
         <TouchableOpacity onPress={updateSecureTextEntry}>
-        {data.secureTextEntry ? 
+        {data.secureTextEntry ?
         <Feather
             name="eye-off"
             color={COLORS.darkgray}
@@ -117,11 +117,22 @@ const SigninScreen = ({navigation}) => {
         }
         </TouchableOpacity>
         </View>
+        <Button
+        title="CLick me"
+        onPress={()=>{analytics().logEvent('generalevent', {
+            id: 3745092,
+            item: 'mens grey t-shirt',
+            description: ['round neck', 'long sleeved'],
+            size: 'L',
+          })
+          alert("You clicked me!!")
+          console.log("Button is clicked")}}
+        />
         <View style={styles.button}>
         <TouchableOpacity
         style={[styles.signIn,{width: 350}]}
-        onPress={()=> {loginHandle(data.email, data.password)}}>
-        <LinearGradient 
+        onPress={()=> {loginHandle(data.email, data.password);}}>
+        <LinearGradient
         colors = {[COLORS.blue, COLORS.darkblue]}
         style={styles.signIn}
         >
@@ -130,12 +141,12 @@ const SigninScreen = ({navigation}) => {
             </Text>
         </LinearGradient>
         </TouchableOpacity>
-        <TouchableOpacity 
+        <TouchableOpacity
         style={[styles.signIn,{
             borderColor: COLORS.peach,
             borderWidth: 1,
             marginTop: 15,
-            width: 350
+            width: 350,
         }]}
         onPress={() => navigation.navigate('SignUpScreen')}>
         <Text style={[styles.textSign,{color: COLORS.peach}]}>Sign up</Text>
@@ -143,21 +154,21 @@ const SigninScreen = ({navigation}) => {
         </View>
         </Animatable.View>
         </View>
-    )
-}
+    );
+};
 export default SigninScreen;
 
 const styles = StyleSheet.create(
     {
         container: {
             flex: 1,
-            backgroundColor: COLORS.peach
+            backgroundColor: COLORS.peach,
         },
         header: {
             flex: 1,
             justifyContent: 'flex-end',
             paddingHorizontal: 20,
-            paddingBottom: 50
+            paddingBottom: 50,
         },
         footer: {
             flex: 3,
@@ -166,44 +177,44 @@ const styles = StyleSheet.create(
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             paddingHorizontal: 20,
-            paddingVertical: 30
+            paddingVertical: 30,
         },
         text_header:{
             color: COLORS.white,
             fontWeight: 'bold',
-            fontSize: 30
+            fontSize: 30,
         },
         text_footer: {
             color: COLORS.black,
-            fontSize: 18
+            fontSize: 18,
         },
         action: {
             flexDirection: 'row',
             marginTop: 10,
             borderBottomWidth: 1,
             borderBottomColor: COLORS.lightGray,
-            paddingBottom: 5
+            paddingBottom: 5,
         },
         textInput: {
             flex: 1,
-            marginTop: Platform.OS == "ios" ? 0 : -12,
+            marginTop: Platform.OS == 'ios' ? 0 : -12,
             paddingLeft: 10,
-            color: COLORS.blue
+            color: COLORS.blue,
         },
         button: {
             alignItems: 'center',
-            marginTop: 50
+            marginTop: 50,
         },
         signIn :{
             width: '100%',
             height: 50,
             justifyContent: 'center',
             alignItems: 'center',
-            borderRadius: 10
+            borderRadius: 10,
         },
         textSign: {
             fontSize: 18,
-            fontWeight: 'bold'
-        }
+            fontWeight: 'bold',
+        },
     }
-)
+);
